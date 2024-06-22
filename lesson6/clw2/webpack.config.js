@@ -1,5 +1,3 @@
-const { mode } = require("../clw1/webpack.config");
-
 module.exports = {
   entry: './src/index.js',
   output: {
