@@ -7,7 +7,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "build": "webpack --mode production --stats-children",
-    "watch": "webpack --mode development --watch --devtool eval-source-map"
+    "start": "webpack-dev-server --mode development --devtool eval-source-map --open"
   },
   "keywords": [],
   "author": "",
@@ -27,9 +27,11 @@
     "progress-webpack-plugin": "^1.0.16",
     "sass": "^1.77.6",
     "sass-loader": "^14.2.1",
+    "style-loader": "^4.0.0",
     "url-loader": "^4.1.1",
     "webpack": "^5.92.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
     "core-js": "^3.37.1"

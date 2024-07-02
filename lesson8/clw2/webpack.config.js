@@ -3,7 +3,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = {
+module.exports = (env, arg) => {
+  const isProduction = arg.mode === 'production';
+
+  const config = {
     entry: './src/index.js',
     output: {
       filename: 'bundle.js',
@@ -16,7 +19,9 @@ module.exports = {
         },
         {
           test: /.s?css$/,
-          use: [MiniCssExtractPlugin.loader,'css-loader', 'sass-loader'],
+          use: [
+            isProduction? MiniCssExtractPlugin.loader : 'style-loader'
+            ,'css-loader', 'sass-loader'],
         },
         {
           test: /.(jpg|png)$/,
@@ -39,8 +44,15 @@ module.exports = {
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
+    ]
+  }
+
+  if(isProduction) {
+    config.plugins.push(
       new MiniCssExtractPlugin({
         filename: "[name].css",
       }),
-    ]
+  )}
+
+  return config;
 };
