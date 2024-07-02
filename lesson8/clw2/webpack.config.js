@@ -44,7 +44,11 @@ module.exports = (env, arg) => {
       new HtmlWebpackPlugin({
         template: "./src/index.html",
       }),
-    ]
+    ],
+    devServer: {
+      port: 9000,
+      hot: true,
+    }
   }
 
   if(isProduction) {
