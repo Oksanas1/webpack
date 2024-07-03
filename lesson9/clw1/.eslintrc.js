@@ -8,6 +8,10 @@ module.exports = {
     ecmaVersion: 10,
     sourceType: 'module'
   },
+  "env": {
+    "browser": true,
+    "node": true
+  },
   globals: {
     document: true,
     alert: true,
