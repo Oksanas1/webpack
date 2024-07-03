@@ -1,26 +1,26 @@
-import { renderTasks } from './renderTasks.js';
-import { createTaskInBase, getTasksList } from './tasksGateway.js';
-import { setToLocalStorageData } from './storage.js';
+import { renderTasks } from './renderTasks';
+import { createTaskInBase, getTasksList } from './tasksGateway';
+import { setToLocalStorageData } from './storage';
 
 export const renderID = () => Math.random().toString(16).slice(2);
 
-const createTask = text => {
+const createTask = (text) => {
   const newTask = {
-      id: renderID(),
-      text,
-      done: false,
-      criateDate: new Date(),
-      finishDate: null,
-    };
+    id: renderID(),
+    text,
+    done: false,
+    criateDate: new Date(),
+    finishDate: null,
+  };
 
   createTaskInBase(newTask)
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
-        getTasksList().then(tasks => {
+        getTasksList().then((tasks) => {
           setToLocalStorageData('tasksList', tasks);
-          renderTasks()
+          renderTasks();
         });
-      };
+      }
     });
 };
 

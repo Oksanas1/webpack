@@ -1,4 +1,4 @@
-import { getLocalStorageData } from './storage.js';
+import { getLocalStorageData } from './storage';
 
 const listElement = document.querySelector('.list');
 
@@ -12,19 +12,19 @@ const createTaskCheckboxElement = (done, id) => {
   return checkbox;
 };
 
-const createDeleteTaskBtnElem = id => {
+const createDeleteTaskBtnElem = (id) => {
   const deleteTaskBtnElem = document.createElement('button');
   deleteTaskBtnElem.textContent = 'x';
-  deleteTaskBtnElem.classList.add('list__item-delete-btn')
+  deleteTaskBtnElem.classList.add('list__item-delete-btn');
   deleteTaskBtnElem.dataset.id = id;
 
   return deleteTaskBtnElem;
 };
 
-const createTextItemElem = text => {
+const createTextItemElem = (text) => {
   const textItemElem = document.createElement('p');
   textItemElem.textContent = text;
-  textItemElem.classList.add('list__item-description')
+  textItemElem.classList.add('list__item-description');
 
   return textItemElem;
 };
@@ -42,7 +42,7 @@ const createTaskItemElement = (text, done, id) => {
     .append(
       createTaskCheckboxElement(done, id),
       createTextItemElem(text),
-      createDeleteTaskBtnElem(id)
+      createDeleteTaskBtnElem(id),
     );
 
   return listItemElem;
@@ -53,7 +53,8 @@ export function renderTasks() {
 
   getLocalStorageData('tasksList')
     .map(
-      ({ text, done, id }) => listElement.append(createTaskItemElement(text, done, id)));
+      ({ text, done, id }) => listElement.append(createTaskItemElement(text, done, id)),
+    );
 }
 
 window.addEventListener('storage', () => renderTasks());

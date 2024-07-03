@@ -1,47 +1,46 @@
-import { renderTasks } from './renderTasks.js';
-import { setToLocalStorageData } from './storage.js';
-import { deleteTaskInBase, getTasksList, updateTaskInBase } from './tasksGateway.js';
+import { renderTasks } from './renderTasks';
+import { setToLocalStorageData } from './storage';
+import { deleteTaskInBase, getTasksList, updateTaskInBase } from './tasksGateway';
 
-const updateTask = clickedElement => {
+const updateTask = (clickedElement) => {
   const done = clickedElement.checked;
 
   updateTaskInBase(clickedElement.dataset.id,
     {
       done,
       finishDate: done ? new Date() : null,
-    }
-  ).then(response => {
+    }).then((response) => {
     if (response.ok) {
-      getTasksList().then(tasks => {
+      getTasksList().then((tasks) => {
         setToLocalStorageData('tasksList', tasks);
-        renderTasks()
+        renderTasks();
       });
     }
   });
 };
 
-const deleteTask = idTask => {
+const deleteTask = (idTask) => {
   deleteTaskInBase(idTask)
-    .then(response => {
+    .then((response) => {
       if (response.ok) {
-        getTasksList().then(tasks => {
+        getTasksList().then((tasks) => {
           setToLocalStorageData('tasksList', tasks);
-          renderTasks()
+          renderTasks();
         });
       }
     });
 };
 
-export const onHandlerTask = event => {
+export const onHandlerTask = (event) => {
   const clickedElement = event.target;
 
-  switch(clickedElement.classList.value) {
-    case ('list__item-checkbox') :
+  switch (clickedElement.classList.value) {
+    case ('list__item-checkbox'):
       updateTask(clickedElement);
       break;
 
-    case ('list__item-delete-btn') :
+    case ('list__item-delete-btn'):
       deleteTask(clickedElement.dataset.id);
       break;
-  };  
+  }
 };

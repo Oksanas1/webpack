@@ -1,11 +1,11 @@
-import { renderTasks } from './renderTasks.js';
-import { setToLocalStorageData } from './storage.js';
-import { getTasksList } from './tasksGateway.js';
-import { initTodoListHendlers } from './todoList.js';
+import { renderTasks } from './renderTasks';
+import { setToLocalStorageData } from './storage';
+import { getTasksList } from './tasksGateway';
+import { initTodoListHendlers } from './todoList';
 import './index.scss';
 
 const initialPage = () => {
-  getTasksList().then(taskList => {
+  getTasksList().then((taskList) => {
     setToLocalStorageData('tasksList', taskList);
     renderTasks();
     initTodoListHendlers();
