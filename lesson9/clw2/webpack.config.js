@@ -1,5 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
@@ -20,8 +20,7 @@ module.exports = (env, arg) => {
         {
           test: /.s?css$/,
           use: [
-            isProduction? MiniCssExtractPlugin.loader : 'style-loader'
-            ,'css-loader', 'sass-loader'],
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
         },
         {
           test: /.(jpg|png)$/,
@@ -36,27 +35,28 @@ module.exports = (env, arg) => {
             },
           ],
         },
-      ]
+      ],
     },
     plugins: [
       new webpack.ProgressPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: "./src/index.html",
+        template: './src/index.html',
       }),
     ],
     devServer: {
       port: 9000,
       hot: true,
-    }
-  }
+    },
+  };
 
-  if(isProduction) {
+  if (isProduction) {
     config.plugins.push(
       new MiniCssExtractPlugin({
-        filename: "[name].css",
+        filename: '[name].css',
       }),
-  )}
+    );
+  }
 
   return config;
 };
